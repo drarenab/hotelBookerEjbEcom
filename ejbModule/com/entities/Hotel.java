@@ -29,10 +29,23 @@ public class Hotel implements Serializable {
 	private ChaineHotel chaineHotel;
 	@OneToMany(mappedBy="hotel")
 	private Collection<Chambre> chambres;
-	
+	@OneToMany(mappedBy="hotel")
+	private Collection<PhotoHotel> photos;
 	
 	public Collection<Chambre> getChambres() {
 		return chambres;
+	}
+
+
+
+	public Collection<PhotoHotel> getPhotos() {
+		return photos;
+	}
+
+
+
+	public void setPhotos(Collection<PhotoHotel> photos) {
+		this.photos = photos;
 	}
 
 
@@ -134,7 +147,7 @@ public class Hotel implements Serializable {
 
 
 	public Hotel(String nom, String adresse, String ville, String region, String codePostal, String nbEtoile,
-			ChaineHotel chaineHotel, Collection<Chambre> chambres) {
+			ChaineHotel chaineHotel, Collection<Chambre> chambres,Collection<PhotoHotel> photos) {
 		super();
 		this.nom = nom;
 		this.adresse = adresse;
@@ -144,7 +157,8 @@ public class Hotel implements Serializable {
 		this.nbEtoile = nbEtoile;
 		this.chaineHotel = chaineHotel;
 		this.chambres = chambres;
-	}
+		this.photos=photos;
+		}
 
 	public Hotel(String nom, String adresse, String ville, String region, String codePostal, String nbEtoile,
 			ChaineHotel chaineHotel) {
@@ -157,6 +171,7 @@ public class Hotel implements Serializable {
 		this.nbEtoile = nbEtoile;
 		this.chaineHotel = chaineHotel;
 		this.chambres = new HashSet<>();
+		this.photos=new HashSet<>();
 	}
 
 

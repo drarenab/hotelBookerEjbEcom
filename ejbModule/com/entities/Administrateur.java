@@ -2,25 +2,24 @@ package com.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 /**
- * Entity implementation class for Entity: Client
+ * Entity implementation class for Entity: Administrateur
  *
  */
 @Entity
 
-public class Client implements Serializable {
+public class Administrateur implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
-	private String nom;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+    private String nom;
 	private String prenom;
 	private String adresse;
 	private String ville;
@@ -35,16 +34,12 @@ public class Client implements Serializable {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy="client") 
-	private Collection<Reservation> reservationsClient;
-	
-	
-	
+	@ManyToOne
+	private Roles role;
 	
 	public String getNom() {
 		return nom;
 	}
-
 
 
 	public void setNom(String nom) {
@@ -52,11 +47,9 @@ public class Client implements Serializable {
 	}
 
 
-
 	public String getPrenom() {
 		return prenom;
 	}
-
 
 
 	public void setPrenom(String prenom) {
@@ -64,11 +57,9 @@ public class Client implements Serializable {
 	}
 
 
-
 	public String getAdresse() {
 		return adresse;
 	}
-
 
 
 	public void setAdresse(String adresse) {
@@ -76,11 +67,9 @@ public class Client implements Serializable {
 	}
 
 
-
 	public String getVille() {
 		return ville;
 	}
-
 
 
 	public void setVille(String ville) {
@@ -88,11 +77,9 @@ public class Client implements Serializable {
 	}
 
 
-
 	public String getRegion() {
 		return region;
 	}
-
 
 
 	public void setRegion(String region) {
@@ -100,11 +87,9 @@ public class Client implements Serializable {
 	}
 
 
-
 	public String getCodePostal() {
 		return codePostal;
 	}
-
 
 
 	public void setCodePostal(String codePostal) {
@@ -112,11 +97,9 @@ public class Client implements Serializable {
 	}
 
 
-
 	public String getSex() {
 		return sex;
 	}
-
 
 
 	public void setSex(String sex) {
@@ -124,11 +107,9 @@ public class Client implements Serializable {
 	}
 
 
-
 	public String getNumTel() {
 		return numTel;
 	}
-
 
 
 	public void setNumTel(String numTel) {
@@ -136,11 +117,9 @@ public class Client implements Serializable {
 	}
 
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 
 	public void setEmail(String email) {
@@ -148,17 +127,14 @@ public class Client implements Serializable {
 	}
 
 
-
-	public Collection<Reservation> getReservationsClient() {
-		return reservationsClient;
+	public String getPassword() {
+		return password;
 	}
 
 
-
-	public void setReservationsClient(Collection<Reservation> reservationsClient) {
-		this.reservationsClient = reservationsClient;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
 
 
 	public Long getId() {
@@ -167,8 +143,18 @@ public class Client implements Serializable {
 
 	
 
-	public Client(String nom, String prenom, String adresse, String ville, String region, String codePostal, String sex,
-			String numTel, String email,String password, Collection<Reservation> reservationsClient) {
+	public Roles getRole() {
+		return role;
+	}
+
+
+	public void setRole(Roles role) {
+		this.role = role;
+	}
+
+
+	public Administrateur(String nom, String prenom, String adresse, String ville, String region, String codePostal,
+			String sex, String numTel, String email, String password, Roles role) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -179,28 +165,12 @@ public class Client implements Serializable {
 		this.sex = sex;
 		this.numTel = numTel;
 		this.email = email;
-		this.password=password;
-		this.reservationsClient = reservationsClient;
-	}
-
-	public Client(String nom, String prenom, String adresse, String ville, String region, String codePostal, String sex,
-			String numTel, String email, String password) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.ville = ville;
-		this.region = region;
-		this.codePostal = codePostal;
-		this.sex = sex;
-		this.numTel = numTel;
-		this.email = email;
-		this.password=password;
-		this.reservationsClient = new HashSet<>();
+		this.password = password;
+		this.role = role;
 	}
 
 
-	public Client() {
+	public Administrateur() {
 		super();
 	}
    
