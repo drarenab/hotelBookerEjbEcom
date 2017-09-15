@@ -8,4 +8,5 @@ import com.entities.Room;
 public interface DbRemote {
 	
 	public java.util.List<Room> getAllRooms();
+	//public String getAllRooms();
 }

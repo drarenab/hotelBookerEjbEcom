@@ -12,6 +12,7 @@ import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 /**
  * Session Bean implementation class Db
  */
+
 @Stateless
 @LocalBean
 public class Db implements DbRemote {
@@ -20,7 +21,7 @@ public class Db implements DbRemote {
     @PersistenceContext(name="primary")
     private EntityManager em;
  
-    // Retrieves all the guests:
+   //  Retrieves all the guests:
     @Override
     public java.util.List<Room> getAllRooms() {
         TypedQuery<Room> query = em.createQuery(
