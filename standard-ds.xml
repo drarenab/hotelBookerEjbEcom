@@ -2,12 +2,12 @@
 <datasources xmlns="//http://www.jboss.org/ironjacamar/schema">
  <datasource jndi-name="java:jboss/datasources/New_MySQL" enabled="true" 
      use-java-context="true" pool-name="New_MySQL">
-  <connection-url>jdbc:mysql://eu-cdbr-azure-west-b.cloudapp.net:3306/hoteldb</connection-url>
+  <connection-url>jdbc:mysql:localhost:3306/hoteldb</connection-url>
   <driver>mysql-connector-java-5.1.6.jar</driver>
   <pool></pool>
   <security>
-   <user-name>b2bfdeee03a91a</user-name>
-   <password>58db8721</password>
+   <user-name>root</user-name>
+   <password></password>
   </security>
  </datasource>
 </datasources>

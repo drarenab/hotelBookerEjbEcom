@@ -1,2 +1,3 @@
 standard-ds.xml
 build/**
+ejbModule/META-INF/persistence.xml

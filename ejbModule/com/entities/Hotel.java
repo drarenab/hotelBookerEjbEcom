@@ -11,10 +11,8 @@ import javax.persistence.*;
  *
  */
 @Entity
-
 public class Hotel implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +27,6 @@ public class Hotel implements Serializable {
 	private ChaineHotel chaineHotel;
 	@OneToMany(mappedBy="hotel")
 	private Collection<Chambre> chambres;
-	
 	
 	public Collection<Chambre> getChambres() {
 		return chambres;
