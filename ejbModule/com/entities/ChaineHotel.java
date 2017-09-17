@@ -11,11 +11,10 @@ import javax.persistence.*;
  * Entity implementation class for Entity: ChaineHotel
  *
  */
-@Entity
 
+@Entity
 public class ChaineHotel implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,11 +25,9 @@ public class ChaineHotel implements Serializable {
 	private Collection<Hotel> hotels;
 	
 	
-	
 	public Collection<Hotel> getHotels() {
 		return hotels;
 	}
-
 
 	public void setHotels(Collection<Hotel> hotels) {
 		this.hotels = hotels;

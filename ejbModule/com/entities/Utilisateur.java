@@ -2,22 +2,23 @@ package com.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 /**
- * Entity implementation class for Entity: Administrateur
+ * Entity implementation class for Entity: Utilisateur
  *
  */
 @Entity
 
-public class Administrateur implements Serializable {
+public class Utilisateur implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String nom;
 	private String prenom;
@@ -37,6 +38,20 @@ public class Administrateur implements Serializable {
 	@ManyToOne
 	private Roles role;
 	
+	@OneToMany(mappedBy="utilisateur") 
+	private Collection<Reservation> reservations;
+	
+	
+	public Collection<Reservation> getReservations() {
+		return reservations;
+	}
+
+
+	public void setReservations(Collection<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+
 	public String getNom() {
 		return nom;
 	}
@@ -153,8 +168,8 @@ public class Administrateur implements Serializable {
 	}
 
 
-	public Administrateur(String nom, String prenom, String adresse, String ville, String region, String codePostal,
-			String sex, String numTel, String email, String password, Roles role) {
+	public Utilisateur(String nom, String prenom, String adresse, String ville, String region, String codePostal,
+			String sex, String numTel, String email, String password, Roles role ,Collection<Reservation> reservations) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -167,10 +182,28 @@ public class Administrateur implements Serializable {
 		this.email = email;
 		this.password = password;
 		this.role = role;
+		this.reservations=reservations;
+				
 	}
-
-
-	public Administrateur() {
+	public Utilisateur(String nom, String prenom, String adresse, String ville, String region, String codePostal,
+			String sex, String numTel, String email, String password, Roles role ) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.ville = ville;
+		this.region = region;
+		this.codePostal = codePostal;
+		this.sex = sex;
+		this.numTel = numTel;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+		this.reservations=new HashSet<>();
+				
+	}
+	
+	
+	public Utilisateur() {
 		super();
 	}
    

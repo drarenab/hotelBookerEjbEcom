@@ -20,17 +20,17 @@ public class Roles implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private String type;
-	@OneToMany(mappedBy="role")
-	private Collection<Administrateur> admin;
+	private String libelle;
+	@OneToMany
+	private Collection<Utilisateur> utilisateur;
 	
-	public String getType() {
-		return type;
+	public String getlibelle() {
+		return libelle;
 	}
 
 
-	public void setType(String type) {
-		this.type = type;
+	public void setlibelle(String libelle) {
+		this.libelle = libelle;
 	}
 
 
@@ -40,27 +40,27 @@ public class Roles implements Serializable {
 
 
 	
-	public Collection<Administrateur> getAdmin() {
-		return admin;
+	public Collection<Utilisateur> getAdmin() {
+		return utilisateur;
 	}
 
 
-	public void setAdmin(Collection<Administrateur> admin) {
-		this.admin = admin;
+	public void setAdmin(Collection<Utilisateur> utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	
 
-	public Roles(String type, Collection<Administrateur> admin) {
+	public Roles(String libelle, Collection<Utilisateur> utilisateur) {
 		super();
-		this.type = type;
-		this.admin = admin;
+		this.libelle = libelle;
+		this.utilisateur = utilisateur;
 	}
 
-	public Roles(String type) {
+	public Roles(String libelle) {
 		super();
-		this.type = type;
-		this.admin = new HashSet<>();
+		this.libelle = libelle;
+		this.utilisateur = new HashSet<>();
 	}
 
 	public Roles() {
