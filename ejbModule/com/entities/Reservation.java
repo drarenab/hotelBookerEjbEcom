@@ -24,7 +24,7 @@ public class Reservation implements Serializable {
 	private int nbPersonne;
 	
 	@ManyToOne
-	private Client client;
+	private Utilisateur utilisateur;
 	
 	@ManyToOne
 	private Chambre chambre;
@@ -60,13 +60,13 @@ public class Reservation implements Serializable {
 	}
 
 
-	public Client getClient() {
-		return client;
+	public Utilisateur getutilisateur() {
+		return utilisateur;
 	}
 
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setutilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 
@@ -86,12 +86,12 @@ public class Reservation implements Serializable {
 
 	
 	
-	public Reservation(Date dateDeb, Date dateFin, int nbPersonne, Client client, Chambre chambre) {
+	public Reservation(Date dateDeb, Date dateFin, int nbPersonne, Utilisateur utilisateur, Chambre chambre) {
 		super();
 		this.dateDeb = dateDeb;
 		this.dateFin = dateFin;
 		this.nbPersonne = nbPersonne;
-		this.client = client;
+		this.utilisateur = utilisateur;
 		this.chambre = chambre;
 	}
 
