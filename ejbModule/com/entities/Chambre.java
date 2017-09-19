@@ -6,15 +6,26 @@ import java.util.HashSet;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * Entity implementation class for Entity: Chambre
  *
  */
 @Entity
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonIdentityInfo(
+//		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+//		  property = "id"
+//)
 public class Chambre implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,12 +35,17 @@ public class Chambre implements Serializable {
 	private Long etage;
 	private int etat;//dispo a la location 0 non dispo 1
 	private float prix; 
+	//@JsonIgnore
 	@ManyToOne
 	private Hotel hotel;
+	//@JsonIgnore
+	@LazyCollection(value = LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy="chambre") 
 	private Collection<Photos> photos;
+	//@JsonIgnore
 
-	@OneToMany(mappedBy="chambre") 
+	@LazyCollection(value = LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy="chambre")
 	private Collection<Reservation> reservationsChambre;
 	
 	

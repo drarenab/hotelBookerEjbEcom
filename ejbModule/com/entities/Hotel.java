@@ -6,11 +6,21 @@ import java.util.HashSet;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * Entity implementation class for Entity: Hotel
  *
  */
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonIdentityInfo(
+//		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+//		  property = "id"
+//)
 public class Hotel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,9 +35,13 @@ public class Hotel implements Serializable {
 	private String nbEtoile;
 	@ManyToOne
 	private ChaineHotel chaineHotel;
-	@OneToMany(mappedBy="hotel")
+	@OneToMany(mappedBy="hotel",
+			//cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY)
 	private Collection<Chambre> chambres;
-	@OneToMany(mappedBy="hotel")
+	@OneToMany(mappedBy="hotel",
+			//cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY)
 	private Collection<PhotoHotel> photos;
 	
 	public Collection<Chambre> getChambres() {

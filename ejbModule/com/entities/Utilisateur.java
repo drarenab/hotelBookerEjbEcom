@@ -7,12 +7,20 @@ import java.util.HashSet;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * Entity implementation class for Entity: Utilisateur
  *
  */
 @Entity
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonIdentityInfo(
+//		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+//		  property = "id"
+//)
 public class Utilisateur implements Serializable {
 
 	
@@ -26,7 +34,7 @@ public class Utilisateur implements Serializable {
 	private String ville;
 	private String region;
 	private String codePostal;
-	private String sex;
+	private String sexe;
 	@Pattern(regexp="#^0[1-9]([-. ]?[0-9]{2}){4}$#",
 			message="{invalid.numTel}")//num tel au format fr
 	private String numTel;
@@ -38,7 +46,7 @@ public class Utilisateur implements Serializable {
 	@ManyToOne
 	private Roles role;
 	
-	@OneToMany(mappedBy="utilisateur") 
+	@OneToMany(mappedBy="utilisateur",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Collection<Reservation> reservations;
 	
 	
@@ -112,13 +120,13 @@ public class Utilisateur implements Serializable {
 	}
 
 
-	public String getSex() {
-		return sex;
+	public String getsexe() {
+		return sexe;
 	}
 
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setsexe(String sexe) {
+		this.sexe = sexe;
 	}
 
 
@@ -169,7 +177,7 @@ public class Utilisateur implements Serializable {
 
 
 	public Utilisateur(String nom, String prenom, String adresse, String ville, String region, String codePostal,
-			String sex, String numTel, String email, String password, Roles role ,Collection<Reservation> reservations) {
+			String sexe, String numTel, String email, String password, Roles role ,Collection<Reservation> reservations) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -177,7 +185,7 @@ public class Utilisateur implements Serializable {
 		this.ville = ville;
 		this.region = region;
 		this.codePostal = codePostal;
-		this.sex = sex;
+		this.sexe = sexe;
 		this.numTel = numTel;
 		this.email = email;
 		this.password = password;
@@ -186,14 +194,14 @@ public class Utilisateur implements Serializable {
 				
 	}
 	public Utilisateur(String nom, String prenom, String adresse, String ville, String region, String codePostal,
-			String sex, String numTel, String email, String password, Roles role ) {
+			String sexe, String numTel, String email, String password, Roles role ) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
 		this.ville = ville;
 		this.region = region;
 		this.codePostal = codePostal;
-		this.sex = sex;
+		this.sexe = sexe;
 		this.numTel = numTel;
 		this.email = email;
 		this.password = password;

@@ -4,8 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * Entity implementation class for Entity: ChaineHotel
@@ -13,6 +18,11 @@ import javax.persistence.*;
  */
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonIdentityInfo(
+//		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+//		  property = "id"
+//)
 public class ChaineHotel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,15 +31,15 @@ public class ChaineHotel implements Serializable {
 	private Long id;
 	private String nom;
 	
-	@OneToMany(mappedBy="chaineHotel")//clé etrangére
-	private Collection<Hotel> hotels;
+	@OneToMany(mappedBy="chaineHotel",cascade = CascadeType.ALL,fetch = FetchType.LAZY)//clé etrangére
+	private List<Hotel> hotels;
 	
 	
-	public Collection<Hotel> getHotels() {
+	public List<Hotel> getHotels() {
 		return hotels;
 	}
 
-	public void setHotels(Collection<Hotel> hotels) {
+	public void setHotels(List<Hotel> hotels) {
 		this.hotels = hotels;
 	}
 
@@ -49,18 +59,18 @@ public class ChaineHotel implements Serializable {
 	}
 
 
-	public ChaineHotel(String nom, Collection<Hotel> hotels) {
-		super();
-		this.nom = nom;
-		this.hotels = hotels;
-	}
+//	public ChaineHotel(String nom, Collection<Hotel> hotels) {
+//		super();
+//		this.nom = nom;
+//		this.hotels = hotels;
+//	}
 
 	
-	public ChaineHotel(String no) {
-		super();
-		this.nom = nom;
-		this.hotels = new HashSet<>();
-	}
+//	public ChaineHotel(String no) {
+//		super();
+//		this.nom = nom;
+//		this.hotels = new HashSet<>();
+//	}
 
 
 	public ChaineHotel() {
