@@ -34,12 +34,14 @@ public class Utilisateur implements Serializable {
 	private String ville;
 	private String region;
 	private String codePostal;
+
 	private String sexe;
-	@Pattern(regexp="#^0[1-9]([-. ]?[0-9]{2}){4}$#",
-			message="{invalid.numTel}")//num tel au format fr
+	//@Pattern(regexp="#^0[1-9]([-. ]?[0-9]{2}){4}$#",
+		//	message="{invalid.numTel}")//num tel au format fr
+
 	private String numTel;
-	@Pattern(regexp="#^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$#",
-			message="{invalid.email}")//adresse mail en minuscule 
+	//@Pattern(regexp="#^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$#",
+	//		message="{invalid.email}")//adresse mail en minuscule 
 	private String email;
 	private String password;
 	
