@@ -6,30 +6,46 @@ import java.util.HashSet;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * Entity implementation class for Entity: Chambre
  *
  */
 @Entity
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonIdentityInfo(
+//		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+//		  property = "id"
+//)
 public class Chambre implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Long numero;
-	private String type;//type de chambre (duo, individuel....)
+	private int nbLits;//nbLits de chambre (duo, individuel....)
 	private Long etage;
 	private int etat;//dispo a la location 0 non dispo 1
 	private float prix; 
+	//@JsonIgnore
 	@ManyToOne
 	private Hotel hotel;
+	//@JsonIgnore
+	@LazyCollection(value = LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy="chambre") 
 	private Collection<Photos> photos;
+	//@JsonIgnore
 
-	@OneToMany(mappedBy="chambre") 
+	@LazyCollection(value = LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy="chambre")
 	private Collection<Reservation> reservationsChambre;
 	
 	
@@ -71,12 +87,12 @@ public class Chambre implements Serializable {
 		this.numero = numero;
 	}
 
-	public String getType() {
-		return type;
+	public int getnbLits() {
+		return nbLits;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setnbLits(int nbLits) {
+		this.nbLits = nbLits;
 	}
 
 	public long getEtage() {
@@ -119,10 +135,10 @@ public class Chambre implements Serializable {
 
 	
 
-	public Chambre(Long numero, String type, Long etage, int etat, float prix, Hotel hotel) {
+	public Chambre(Long numero, int nbLits, Long etage, int etat, float prix, Hotel hotel) {
 		super();
 		this.numero = numero;
-		this.type = type;
+		this.nbLits = nbLits;
 		this.etage = etage;
 		this.etat = etat;
 		this.prix = prix;
@@ -132,11 +148,11 @@ public class Chambre implements Serializable {
 	}
 
 	
-	public Chambre(Long numero, String type, Long etage, int etat, float prix, Hotel hotel, Collection<Photos> photos,
+	public Chambre(Long numero, int nbLits, Long etage, int etat, float prix, Hotel hotel, Collection<Photos> photos,
 			Collection<Reservation> reservationsChambre) {
 		super();
 		this.numero = numero;
-		this.type = type;
+		this.nbLits = nbLits;
 		this.etage = etage;
 		this.etat = etat;
 		this.prix = prix;

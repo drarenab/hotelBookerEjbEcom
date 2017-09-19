@@ -14,29 +14,4 @@ import com.entities.Chambre;
 @LocalBean
 public class Booking implements BookingRemote{
 	
-	@PersistenceContext(name="primary")
-    private EntityManager em;
-	
-	@Override
-	public List<Chambre> getALlRooms(
-			//a verifier ce qu'on a besoin comme addresse avec Hamada
-//			String postCode,
-//			String state,
-//			String city,
-//			String checkInDate,
-//			String checkOutDate,
-//			String nbRoom,
-//			String nbAdult,
-//			String nbChildren
-			) {
-		
-		 TypedQuery<Chambre> query = em.createQuery(
-		            "SELECT C FROM Chambre C", Chambre.class);
-		 
-		 return query.getResultList();
-	}
-
-//	public Chambre getOneRoom() {
-//		
-//	}
 }
