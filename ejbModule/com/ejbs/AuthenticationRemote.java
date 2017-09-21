@@ -10,4 +10,6 @@ public interface AuthenticationRemote {
 	public Utilisateur validUser(String username,String password);
 	public Roles getRoleFromLibelle(String libelle);
 	public boolean registerUser(String nom,String prenom,String adresse,String ville,String region,String codePostal,String sexe,String numTel,String email,String pwd,String role) ;
+	public Utilisateur getUserFromId(Long id) ;
+
 }

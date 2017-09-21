@@ -67,4 +67,25 @@ public class Authentication implements AuthenticationRemote{
 		//return (query.getResultList()!=null && !query.getResultList().isEmpty()); //retourne true si un user a deja utiliser cette adresse email
 		
 	}
+	@Override
+	public Utilisateur getUserFromId(Long id) {
+		System.out.println("getuserrrrrrrr");
+
+		TypedQuery<Utilisateur> query=em.createQuery("SELECT U FROM Utilisateur U where U.id=:id",Utilisateur.class )
+				.setParameter("id", id);
+		System.out.println("Queryyyyyy"+query);
+
+		List<Utilisateur> l=query.getResultList();
+		System.out.println("siiiiiiiiize"+l.size());
+
+		if(l!=null && !l.isEmpty()) {
+			System.out.println("+je suis laaaa");
+
+			return l.get(0);
+		}
+		System.out.println("je suis pas la ");
+
+		return null;
+	}
+	
 }

@@ -30,7 +30,8 @@ public class Reservation implements Serializable {
 	private Long id;
 	private Date dateDeb;
 	private Date dateFin;
-	private int nbPersonne;
+	private int nbEnfant;
+	private int nbAdulte;
 	
 	@ManyToOne
 	private Utilisateur utilisateur;
@@ -59,16 +60,24 @@ public class Reservation implements Serializable {
 	}
 
 
-	public int getNbPersonne() {
-		return nbPersonne;
+	public int getNbEnfant() {
+		return nbEnfant;
 	}
 
 
-	public void setNbPersonne(int nbPersonne) {
-		this.nbPersonne = nbPersonne;
+	public void setNbEnfant(int nbEnfant) {
+		this.nbEnfant = nbEnfant;
+	}
+
+	public int getNbAdulte() {
+		return nbAdulte;
 	}
 
 
+	public void setNbAdulte(int nbAdulte) {
+		this.nbAdulte = nbAdulte;
+	}
+	
 	public Utilisateur getutilisateur() {
 		return utilisateur;
 	}
@@ -95,11 +104,12 @@ public class Reservation implements Serializable {
 
 	
 	
-	public Reservation(Date dateDeb, Date dateFin, int nbPersonne, Utilisateur utilisateur, Chambre chambre) {
+	public Reservation(Date dateDeb, Date dateFin, int nbEnfant,int nbAdulte, Utilisateur utilisateur, Chambre chambre) {
 		super();
 		this.dateDeb = dateDeb;
 		this.dateFin = dateFin;
-		this.nbPersonne = nbPersonne;
+		this.nbEnfant = nbEnfant;
+		this.nbAdulte=nbAdulte;
 		this.utilisateur = utilisateur;
 		this.chambre = chambre;
 	}
