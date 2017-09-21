@@ -17,9 +17,6 @@ import javax.persistence.TypedQuery;
 
 import com.entities.Chambre;
 import com.entities.Reservation;
-import com.entities.Roles;
-
-import security.JwtSecurity;
 import com.entities.Utilisateur;
 
 

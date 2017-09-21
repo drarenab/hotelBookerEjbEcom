@@ -31,7 +31,7 @@ public class Chambre implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Long numero;
-	private int nbLits;//nbLits de chambre (duo, individuel....)
+	private int nbLits;//nbLits de chambre
 	private Long etage;
 	private int etat;//dispo a la location 0 non dispo 1
 	private float prix; 

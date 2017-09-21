@@ -2,4 +2,6 @@ standard-ds.xml
 build/**
 .classpath
 ejbModule/META-INF/persistence.xml
-/bin/
+/bin/**
+.classpath
+.settings/**
