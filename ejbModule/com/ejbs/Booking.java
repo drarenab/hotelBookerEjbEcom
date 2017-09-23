@@ -18,6 +18,7 @@ import javax.persistence.TypedQuery;
 import com.entities.Chambre;
 import com.entities.Reservation;
 import com.entities.Utilisateur;
+import com.utilities.Util;
 
 
 @Stateless
@@ -35,7 +36,7 @@ public class Booking implements BookingRemote{
 		if(!idUser.isEmpty()) {
 			Utilisateur u=authenticationRemote.getUserFromId(Long.parseLong(idUser));
 			Chambre c=getChambreFromId(idChambre);
-			Reservation r=new Reservation(StringToDate(dateDeb), StringToDate(dateFin), nbEnfant, nbAdulte, u, c);
+			Reservation r=new Reservation(Util.StringToDate(dateDeb), Util.StringToDate(dateFin), nbEnfant, nbAdulte, u, c);
 			em.persist(r);
 		}
 	}
@@ -44,13 +45,13 @@ public class Booking implements BookingRemote{
 	public boolean isRoomAvailableForPeriod(Long idChambre,String dateDeb,String dateFin) {
 		TypedQuery<Reservation> query = em.createQuery(
 				"SELECT R FROM Reservation R "
-				+ "Join R.chambre c "
-				+ "where (:dateDeb BETWEEN R.dateDeb AND R.dateFin) "
-				+ "OR (:dateFin BETWEEN R.dateDeb AND R.dateFin) "
-				+ "AND c.id=:idChambre",Reservation.class)
+//				+ "Join R.chambre c "
+				+ "where R.chambre.id=:idChambre "
+				+ "AND (:dateFin BETWEEN R.dateDeb AND R.dateFin "
+				+ "OR :dateDeb BETWEEN R.dateDeb AND R.dateFin) ",Reservation.class)
 				.setParameter("idChambre", idChambre)
-				.setParameter("dateDeb", StringToDate(dateDeb))
-				.setParameter("dateFin", StringToDate(dateFin));
+				.setParameter("dateDeb", Util.StringToDate(dateDeb))
+				.setParameter("dateFin", Util.StringToDate(dateFin));
 	 
 		List<Reservation> l=query.getResultList();
 		if(l!=null && !l.isEmpty()) {//cette periode contient au moins une reservation
@@ -71,19 +72,5 @@ public class Booking implements BookingRemote{
 		}
 		return null;
 	}
-	private java.sql.Date StringToDate(String date){//a mettre dans une classe util 
-		
-		try {
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-	        Date parsed = format.parse(date);
-	        java.sql.Date sql = new java.sql.Date(parsed.getTime());
-	        return sql;
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-        
-	}
+	
 }
