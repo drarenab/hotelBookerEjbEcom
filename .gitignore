@@ -5,3 +5,5 @@ ejbModule/META-INF/persistence.xml
 /bin/**
 .classpath
 .settings/**
+ejbModule/com/entities/*_.java
+
