@@ -2,12 +2,14 @@ package com.ejbs;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 
 import com.entities.Chambre;
 
 @Remote
 public interface HotelsRemote {
+	
 	
 	public List<Chambre> getALlRooms(
 			//a verifier ce qu'on a besoin comme addresse avec Hamada
@@ -20,4 +22,5 @@ public interface HotelsRemote {
 //			String nbAdult,
 //			String nbChildren
 			);
+	List<Chambre> getRoomsForFilter(String ville, String checkInDate, String checkOutDate, int nbAdult, int nbChildren);
 }
