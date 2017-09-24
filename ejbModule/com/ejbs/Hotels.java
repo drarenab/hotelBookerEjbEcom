@@ -33,7 +33,7 @@ public class Hotels implements HotelsRemote{
 			) {
 		
 		 TypedQuery<Chambre> query = em.createQuery(
-		            "SELECT C FROM Chambre C", Chambre.class);
+		            "SELECT C FROM Chambre C WHERE C.etat=1", Chambre.class);
 		 
 		 return query.getResultList();
 	}
@@ -51,7 +51,7 @@ public class Hotels implements HotelsRemote{
 		            "SELECT C FROM Chambre C "+
 //		            "LEFT Join C.reservationsChambre R " +
 		            "Join C.hotel H "+
-		            "WHERE H.ville=:ville AND C.nbLits>=:nbPlace "//+ 
+		            "WHERE C.etat=1 AND H.ville=:ville AND C.nbLits>=:nbPlace "//+ 
 //		            "AND  NOT(:dateDeb BETWEEN R.dateDeb AND R.dateFin " + 
 //		            "OR :dateFin BETWEEN R.dateDeb AND R.dateFin )"
 //		            + "OR R.chambre=C.id)"
