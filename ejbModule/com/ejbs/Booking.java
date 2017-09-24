@@ -73,4 +73,37 @@ public class Booking implements BookingRemote{
 		return null;
 	}
 	
+
+	@Override
+	public boolean doUserOwnBooking(Long idUser,Long idBooking) {
+		TypedQuery<Reservation> query = em.createQuery("SELECT R FROM Reservation R where "
+				+ "R.id=:idBooking "
+				+ "AND R.utilisateur.id =:idUser", Reservation.class)
+				.setParameter("idBooking", idBooking)
+				.setParameter("idUser", idUser);
+
+		List<Reservation> bookingList = query.getResultList();
+		if(bookingList != null && !bookingList.isEmpty()) {
+			System.out.println(" not an empty list of bookings");
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean cancelBooking(Long idBooking) {
+		Reservation reservation = em.find(Reservation.class,idBooking);
+//		try {
+//			em.getTransaction().begin();
+			em.remove(reservation);
+//			em.getTransaction().commit();
+			return true;
+//		} catch(Exception e) {
+//		    em.getTransaction().rollback();
+//		    return false;
+//		}
+	}
+	
+	
 }

@@ -12,4 +12,6 @@ public interface BookingRemote {
 	public void addRowInReservation(String dateDeb,String dateFin,int nbEnfant,int nbAdulte,long idChambre,String token);
 	public boolean isRoomAvailableForPeriod(Long idChambre,String dateDeb,String dateFin);
 	public Chambre getChambreFromId(Long id);
+	public boolean doUserOwnBooking(Long idUser,Long idBooking);
+	public boolean cancelBooking(Long idBooking) ;
 }
