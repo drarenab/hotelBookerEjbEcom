@@ -37,6 +37,7 @@ public class Hotels implements HotelsRemote{
 		 
 		 return query.getResultList();
 	}
+	
 	@Override
 	public List<Chambre> getRoomsForFilter(
 			String ville,
