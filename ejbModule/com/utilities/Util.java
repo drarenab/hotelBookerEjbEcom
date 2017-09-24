@@ -3,7 +3,6 @@ package com.utilities;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 public class Util {
 public static java.sql.Date StringToDate(String date){//a mettre dans une classe util 
 		
@@ -20,4 +19,9 @@ public static java.sql.Date StringToDate(String date){//a mettre dans une classe
 		}
         
 	}
+public static boolean isDateDebGreaterThenDateFin(String dateDeb,String dateFin ) {
+	System.out.println(StringToDate(dateDeb).compareTo(StringToDate(dateFin)));
+	if(StringToDate(dateDeb).compareTo(StringToDate(dateFin))>0) return false;
+	return true;
+}
 }
