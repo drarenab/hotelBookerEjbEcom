@@ -57,13 +57,15 @@ public class Authentication implements AuthenticationRemote{
 		else return null;
 	}
 	@Override
-	public boolean registerUser(String nom,String prenom,String adresse,String ville,String region,String codePostal,String sexe,String numTel,String email,String pwd,String role) {
+	public boolean registerUser(String nom,String prenom,String adresse,String ville,String region,String codePostal,String sexe,String numTel,String email,String pwd,String role) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		//test if email adress not exist in database
 		
 		if (emailExists(email)) {
 			return false;
 		}
-		Utilisateur u=new Utilisateur(nom, prenom, adresse, ville, region, codePostal, sexe,numTel, email,pwd,getRoleFromLibelle(role));
+		
+		String hashedPassword = Util.generateStorngPasswordHash(pwd);
+		Utilisateur u=new Utilisateur(nom, prenom, adresse, ville, region, codePostal, sexe,numTel, email,hashedPassword,getRoleFromLibelle(role));
 		em.persist(u);
 		return true;
 	}
