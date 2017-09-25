@@ -38,7 +38,10 @@ public class JwtSecurity {
 	
 	public  String validateToken(String token) {
 //		Jwts.parser().isSigned(arg0)
+		
+		
 		try {
+			
 			Jws<Claims> jw=Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
 			if(jw.getBody().getExpiration().before(Date.from(Instant.now()))) {//pas expirer 
 				return "";
@@ -54,17 +57,25 @@ public class JwtSecurity {
 
 	
 	
-//	public void refreshToken(String token) {
-//		Jws<Claims> jw=Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
-//		
-//		jw.getBody().setExpiration(Date.from( Instant.now().plus( TOKEN_VALIDITY )));
-//		String subject=jw.getBody().getSubject();
-//		String loginId=jw.getBody().get(CLAIM_ID).toString();
-//		
+	public String refreshToken(String token) {
+		Jws<Claims> jw=Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
+		
+		jw.getBody().setExpiration(Date.from( Instant.now().plus( TOKEN_VALIDITY )));
+		String subject=jw.getBody().getSubject();
+		String loginId=jw.getBody().get(CLAIM_ID).toString();
+		
+		return Jwts.builder()
+			.setSubject(subject)
+			.setExpiration(jw.getBody().getExpiration())
+            .setIssuedAt(jw.getBody().getIssuedAt())
+			.claim(CLAIM_ID,loginId)
+			.signWith( SIGNATURE_ALGORITHM, SECRET_KEY )
+            .compact();
+			
 //		Jwts.builder()
 //			.setSubject(subject)
 //			.claim(CLAIM_ROLE, arg1)
-//	}
+	}
 	
 	
 }
