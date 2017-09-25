@@ -1,6 +1,9 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -10,7 +13,7 @@ import javax.validation.constraints.Pattern;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+import com.utilities.*;
 /**
  * Entity implementation class for Entity: Utilisateur
  *
@@ -23,7 +26,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 //)
 public class Utilisateur implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -75,7 +77,6 @@ public class Utilisateur implements Serializable {
 	public String getPrenom() {
 		return prenom;
 	}
-
 
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
@@ -217,4 +218,9 @@ public class Utilisateur implements Serializable {
 		super();
 	}
    
+	
+
+	
+	
+	
 }

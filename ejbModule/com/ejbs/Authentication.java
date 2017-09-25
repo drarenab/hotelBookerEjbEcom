@@ -1,6 +1,9 @@
 package com.ejbs;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
+import com.utilities.*;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -10,7 +13,7 @@ import javax.persistence.TypedQuery;
 
 import com.entities.Roles;
 import com.entities.Utilisateur;
-
+import com.utilities.*;
 //import security.JwtSecurity;
 
 @Stateless
@@ -20,17 +23,28 @@ public class Authentication implements AuthenticationRemote{
     private EntityManager em;
 	
 	@Override
-	public Utilisateur validUser(String username,String password) {
+	public Utilisateur validUser(String username,String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		
-		TypedQuery<Utilisateur> query = em.createQuery("SELECT U FROM Utilisateur U where U.email=:login AND U.password=:pwd", Utilisateur.class)
-				.setParameter("login", username)
-				.setParameter("pwd", password);
+		//System.out.println("validuser : hashedPassword:"+hashedPassword);
+		
+		TypedQuery<Utilisateur> query = em.createQuery("SELECT U FROM Utilisateur U where U.email=:login", Utilisateur.class)
+				.setParameter("login", username);
 	 
 		List<Utilisateur> l=query.getResultList();
-		if(l!=null && !l.isEmpty()) {
-			return l.get(0);
+		if(l==null || l.isEmpty()) {
+			return null;
 		}
-		else return null;
+		
+		//password validation
+		
+		
+		System.out.println("Password validation started , password in db: "+l.get(0).getPassword());
+		boolean matched = Util.validatePassword(password,l.get(0).getPassword());
+		
+		if(matched)
+			return l.get(0);
+		
+		return null;
 	}
 	@Override
 	public Roles getRoleFromLibelle(String libelle) {
@@ -82,6 +96,8 @@ public class Authentication implements AuthenticationRemote{
 
 		return null;
 	}
+	
+	
 	@Override
 	public Utilisateur getUserFormEmail(String email) {
 		TypedQuery<Utilisateur> query=em.createQuery("SELECT U FROM Utilisateur U where U.email=:email",Utilisateur.class )
@@ -96,6 +112,17 @@ public class Authentication implements AuthenticationRemote{
 
 		return null;		
 		
+	}
+
+	@Override
+	public boolean updateUserPassword(Long id,String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		Utilisateur utilisateur = em.find(Utilisateur.class, id);
+		String hashedPassword = Util.generateStorngPasswordHash(password);
+		System.out.println("Password:"+password);
+		System.out.println("HashedPassword:"+hashedPassword);
+		
+		utilisateur.setPassword(hashedPassword);
+		return true;
 	}
 	
 }
