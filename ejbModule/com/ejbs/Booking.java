@@ -47,8 +47,12 @@ public class Booking implements BookingRemote{
 				"SELECT R FROM Reservation R "
 //				+ "Join R.chambre c "
 				+ "where R.chambre.id=:idChambre "
-				+ "AND (:dateFin BETWEEN R.dateDeb AND R.dateFin "
-				+ "OR :dateDeb BETWEEN R.dateDeb AND R.dateFin) ",Reservation.class)
+				+ "AND ((:dateFin>=R.dateDeb AND dateFin<R.dateFin) "
+
+//				+ "AND (:dateFin BETWEEN R.dateDeb AND R.dateFin "
+//				+ "OR :dateDeb BETWEEN R.dateDeb AND R.dateFin) ",Reservation.class)
+				+ "OR (:dateDeb>=R.dateDeb AND :dateDeb<R.dateFin)) ",Reservation.class)
+
 				.setParameter("idChambre", idChambre)
 				.setParameter("dateDeb", Util.StringToDate(dateDeb))
 				.setParameter("dateFin", Util.StringToDate(dateFin));

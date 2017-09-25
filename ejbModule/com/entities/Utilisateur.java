@@ -48,7 +48,7 @@ public class Utilisateur implements Serializable {
 	@ManyToOne
 	private Roles role;
 	
-	@OneToMany(mappedBy="utilisateur",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="utilisateur")//,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Collection<Reservation> reservations;
 	
 	

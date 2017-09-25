@@ -29,7 +29,7 @@ public class Roles implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String libelle;
-	@OneToMany(mappedBy="role")
+	@OneToMany(mappedBy="role")//,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Collection<Utilisateur> utilisateur;
 	
 	public String getlibelle() {
