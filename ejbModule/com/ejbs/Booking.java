@@ -97,7 +97,7 @@ public class Booking implements BookingRemote{
 
 	@Override
 	public boolean cancelBooking(Long idBooking) {
-		Reservation reservation = em.find(Reservation.class,idBooking);
+		Reservation reservation = em.find(Reservation.class,idBooking); // verify not null
 //		try {
 //			em.getTransaction().begin();
 			em.remove(reservation);
