@@ -25,20 +25,20 @@ public class PhotoHotel implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private Long nom;
+	private String nom;
 	private String url;
 	@ManyToOne 
 	private Hotel hotel;
 	
 	
 	
-	public Long getNom() {
+	public String getNom() {
 		return nom;
 	}
 
 
 
-	public void setNom(Long nom) {
+	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
@@ -74,7 +74,7 @@ public class PhotoHotel implements Serializable {
 
 
 
-	public PhotoHotel(Long nom, String url, Hotel hotel) {
+	public PhotoHotel(String nom, String url, Hotel hotel) {
 		super();
 		this.nom = nom;
 		this.url = url;

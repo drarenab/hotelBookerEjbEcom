@@ -24,7 +24,7 @@ public class Photos implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private Long nom;
+	private String nom;
 	private String url;
 	@ManyToOne
 	private Chambre chambre;
@@ -46,13 +46,13 @@ public class Photos implements Serializable {
 
 
 
-	public Long getNom() {
+	public String getNom() {
 		return nom;
 	}
 
 
 
-	public void setNom(Long nom) {
+	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
@@ -70,7 +70,7 @@ public class Photos implements Serializable {
 
 
 	
-	public Photos(Long nom, String url, Chambre chambre) {
+	public Photos(String nom, String url, Chambre chambre) {
 		super();
 		this.nom= nom;
 		this.url = url;
